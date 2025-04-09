@@ -17,12 +17,20 @@ const uri = process.env.MONGO_URL;
 const app = express();
 
 // ✅ Fixed CORS Configuration
-app.use(
-  cors({
-    origin: "http://localhost:3000", // Frontend origin
-    credentials: true, // To allow cookies, sessions
-  })
-);
+const allowedOrigins = ["http://localhost:3000", "http://localhost:3001"];
+
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  credentials: true,
+};
+
+app.use(cors(corsOptions));
 
 app.use(bodyParser.json());
 
