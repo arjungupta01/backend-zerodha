@@ -17,7 +17,10 @@ const uri = process.env.MONGO_URL;
 const app = express();
 
 // ✅ Fixed CORS Configuration
-const allowedOrigins = ["http://localhost:3000", "http://localhost:3001"];
+const allowedOrigins = [
+  "https://dashborad-zerodha.vercel.app",
+  "https://frontend-zerodha.vercel.app",
+];
 
 const corsOptions = {
   origin: function (origin, callback) {
